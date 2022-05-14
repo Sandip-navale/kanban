@@ -1,0 +1,16 @@
+main {
+  width: 40%;
+  margin: auto;
+}
+
+.create-btn{
+  /* padding: 3px; */
+  margin: 900px;
+  width: 72px;
+  height: 32px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: lightblue;
+  color: black;
+}
