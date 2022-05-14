@@ -1,155 +1,103 @@
-<p>taskcreate works!</p>
-<form (ngSubmit)="submitForm(taskForm)" #taskForm="ngForm">
-  <label for="task_title">Task Title:</label>
-  <div class="input-group mb-3">
-    <input
-      type="text"
-      ngModel
-      name="task_title"
-      task_title="ngModel"
-      class="form-control"
-      id="task_title"
-      placeholder="Enter Task Title"
-      aria-label="task_title"
-      aria-describedby="basic-addon1"
-      required
-    />
-  </div>
-  <div
-            class="text-muted"
-            *ngIf="
-              !taskForm.controls['task_title'].valid &&
-              taskForm.controls['task_title']?.touched
-            "
-          >
-            <small> Please Enter Valid Task Title </small>
-          </div>
+
+<mat-card>
+  <!--<h1>Create Task</h1>-->
+
+    <form (submit)="submitTask(taskForm)" #taskForm="ngForm">
+      <mat-form-field>
+      <label  for="task_name">Task Name:</label>
+      <input
+        matInput
+        type="text"
+        name="task_name"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Enter the Task Name"
+        #task_name="ngModel">
+      <mat-error *ngIf="task_name.invalid">Please enter a correct Task name.</mat-error>
+
+   </mat-form-field>
+
+
+           <mat-form-field>
           <label for="task_description">Task Description:</label>
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              ngModel
-              name="task_description"
-              task_description="ngModel"
-              class="form-control"
-              id="task_description"
-              placeholder="Enter Task Description"
-              aria-label="taskid"
-              aria-describedby="basic-addon1"
-              required
-            />
-          </div>
-          <div
-            class="text-muted"
-            *ngIf="
-              !taskForm.controls['task_description'].valid &&
-              taskForm.controls['task_description']?.touched
-            "
-          >
-            <small> Please Enter Valid Task Description </small>
-          </div>
-          <label for="assignee">Assignee:</label>
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              ngModel
-              name="assignee"
-              assignee="ngModel"
-              class="form-control"
-              id="assignee"
-              placeholder="Enter Task Assignee"
-              aria-label="taskid"
-              aria-describedby="basic-addon1"
-              required
-            />
-          </div>
-          <div
-            class="text-muted"
-            *ngIf="
-              !taskForm.controls['assignee'].valid &&
-              taskForm.controls['assignee']?.touched
-            "
-          >
-            <small> Task must be assigned to someone </small>
-          </div>
-          <label for="date">Deadline:</label>
-          <div class="input-group mb-3">
+          <textarea
+          matInput
+          rows="2"
+          name="task_description"
+          ngModel
+          required
+          placeholder="Task Description"
+          #task_description="ngModel"></textarea>
+        <mat-error *ngIf="task_description.invalid">Please enter a task description.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+        <label for="assignee">Assignee:</label>
+        <input
+        matInput
+        type="text"
+        name="assignee"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Enter Assignee Name"
+        #assignee="ngModel">
+      <mat-error *ngIf="assignee.invalid">Please enter a Assignee.</mat-error>
+       </mat-form-field>
+
+
+
+
+            <mat-form-field>
+            <label for="date">Start Date:</label>
             <input
               type="date"
               ngModel
-              name="deadline"
+              name="start_date"
               deadline="ngModel"
               class="form-control"
-              id="deadline"
-              placeholder="Enter Deadline"
+              id="start_date"
+              placeholder="Enter Start Date"
               aria-label="taskid"
               aria-describedby="basic-addon1"
               required
             />
-          </div>
-          <div
-            class="text-muted"
-            *ngIf="
-              !taskForm.controls['deadline'].valid &&
-              taskForm.controls['deadline']?.touched
-            "
-          >
-            <small> Please Enter Valid Deadline </small>
-          </div>
-          <label for="Status">Status:</label>
-          <div class="status-dropdown">
-              <mat-label>Set Status</mat-label>
-              <select
-                matNativeControl
-                required
-                name="status"
-                ngModel
-                #status="ngModel"
-              >
-                <option
-                  *ngFor="let status of statuses"
-                  value="{{ status }}"
-                >
-                  {{ status }}
-                </option>
-              </select>
-          </div>
-          <label for="priority">Priority:</label>
-          <div class="priority-dropdown">
-              <mat-label>Set Priority</mat-label>
-              <select
-                matNativeControl
-                required
-                name="priority"
-                ngModel
-                #priority="ngModel"
-              >
-                <option
-                  *ngFor="let priority of priorities"
-                  value="{{ priority }}"
-                >
-                  {{ priority }}
-                </option>
-              </select>
-          </div>
+          </mat-form-field>
 
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              type="ngSubmit"
-              class="btn btn-primary"
-              [disabled]="!taskForm.valid"
-              ngSubmit
-              data-bs-dismiss="modal"
-            >
-              Save changes
-            </button>
-          </div>
-        </form>
+
+
+
+            <mat-form-field>
+            <mat-label for="date">Due Date:</mat-label>
+            <input
+              type="date"
+              ngModel
+              name="due_date"
+              deadline="ngModel"
+              class="form-control"
+              id="due_date"
+              placeholder="Enter Due Date"
+              aria-label="taskid"
+              aria-describedby="basic-addon1"
+              required
+            />
+
+
+           </mat-form-field>
+
+
+
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit">Save Task</button>
+    </form>
+
+
+</mat-card>
+
+
+
 

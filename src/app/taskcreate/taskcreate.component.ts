@@ -8,26 +8,27 @@ import { TaskService } from '../task.service';
   styleUrls: ['./taskcreate.component.css']
 })
 export class TaskcreateComponent implements OnInit {
+  task_name="";
+  task_description="";
+  assignee="";
+  start_date="";
+  due_date="";
 
   constructor(public taskService: TaskService) { }
-  addTask(form: NgForm) {}
 
-  ngOnInit(): void {
-  }
-  priorities = ['High', 'Medium', 'Low'];
-  statuses = ['ToDo', 'InProgress', 'done'];
-  submitForm(taskForm: NgForm) {
+  ngOnInit(): void {}
+
+  submitTask(form: NgForm){
     // addTask function directly written in the submit form
     // when the form will be submitted it will automatically add the details
     this.taskService.addTaskService(
-      taskForm.value.task_title,
-      taskForm.value.task_description,
-      taskForm.value.assignee,
-      taskForm.value.deadline,
-      taskForm.value.status,
-      taskForm.value.priority,
+      form.value.task_name,
+      form.value.task_description,
+      form.value.assignee,
+      form.value.start_date,
+      form.value.due_date,
+
     );
-    taskForm.resetForm();
-    // console.log(taskForm.value);
   }
-}
+
+  }
