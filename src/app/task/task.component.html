@@ -1,42 +1,43 @@
-<div cdkDropListGroup>
-  <div class="example-container">
+<div class="todo-section">
 
 
-    <div
-      cdkDropList
-      [cdkDropListData]="todo"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <h2>To do</h2>
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+  <mat-expansion-panel *ngFor="let task of Tasks" (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false">
+    <mat-expansion-panel-header style="background-color:rgb(251, 255, 0)">
+    <mat-panel-title>
+      <h4><b style="font-size: 20px;">Task name : </b></h4> &nbsp;&nbsp;&nbsp;&nbsp; <h3 style="font-size: 20px;">{{ task.task_name }}</h3>
+    </mat-panel-title>
+   </mat-expansion-panel-header>
+<br>
+<div class="example-card">
+   <p style="font-size: 20px;"><b>Task description :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{ task.task_description }}</p>
+
+    <p style="font-size: 20px;"><b>Assignee : </b>&nbsp;&nbsp;&nbsp;&nbsp;{{ task.assignee }}</p>
+
+
+    <div class="mat-card-footer">
+      <p style="font-size: 20px;"><b>Start :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ task.start_date }}</p>
+      <p style="font-size: 20px;"><b>Due :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ task.due_date }}</p>
+      <a
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </a>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/edittask', task.id]">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="onDelete(task.id)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
     </div>
-  </div>
-
-  <div class="example-container">
-
-
-    <div
-      cdkDropList
-      [cdkDropListData]="inprogress"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <h2>In Progress</h2>
-      <div class="example-box" *ngFor="let item of inprogress" cdkDrag>{{item}}</div>
     </div>
-  </div>
+</mat-expansion-panel>
 
 
-<div class="example-container">
-
-
-  <div
-    cdkDropList
-    [cdkDropListData]="done"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <h2>Done</h2>
-    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-  </div>
-</div>
-</div>
-
+ </div>

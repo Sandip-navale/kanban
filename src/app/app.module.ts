@@ -13,6 +13,9 @@ import { TaskcreateComponent } from './taskcreate/taskcreate.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatExpansionModule} from '@angular/material/expansion';
+import{HttpClientModule} from "@angular/common/http";
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FormsModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule,
+    MatMenuModule,
+    MatIconModule
 
   ],
   providers: [],

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Task} from '../app.task.model';
+import { TaskService } from '../task.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -7,36 +9,30 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  todo = [
-    'Get to work',
-    'Go home'
-  ];
-  inprogress = [
-    'Ready to go party',
-    'Progress Work'
-  ];
-  done = [
-    'Get the code',
-    'Check e-mail'
-  ];
+
+
+  Tasks:Task[] =[];
+  private tasksSub: Subscription | undefined;
+
 
   panelOpenState = false;
 
-  constructor() { }
+  constructor(public taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.taskService.getTasks();
+    console.log("inside list",this.Tasks);
+    this.tasksSub = this.taskService.getTaskUpdateListener().subscribe((Tasks: Task[]) => {
+        this.Tasks = Tasks;
+    console.log("List of task",this.Tasks);
+      });
+  }
+  ngOnDestroy(): void {
+    this.tasksSub?.unsubscribe();
+  }
+  onDelete(taskId: string | undefined){
+    this.taskService.deleteTask(taskId);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
+
 }
